@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jst.domain.member.mapper.UserMapper">
+    <select id="getUsers" resultType="com.jst.domain.member.dto.TestDto">
+        SELECT
+            *
+        FROM
+            member
+    </select>
+
+    <select id="getUser" parameterType="java.lang.String" resultType="java.util.HashMap">
+        SELECT
+            *
+        FROM
+            member
+        WHERE
+            id = #{id}
+    </select>
+
+    <insert id="addUser" parameterType="com.jst.domain.member.dto.TestDto">
+        INSERT INTO
+            member (id,user_name,email,phone,create_date)
+        VALUES
+            (UUID(),#{userNm}, #{email}, #{phone},now())
+    </insert>
+
+    <update id="updateUser" parameterType="com.jst.domain.member.dto.TestDto">
+        UPDATE
+            member
+        SET
+            user_name=#{userNm},email=#{email},phone=#{phone},update_date=now()
+        WHERE
+            id=#{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="java.lang.String">
+        DELETE FROM member WHERE id=#{id}
+    </delete>
+
+</mapper>
